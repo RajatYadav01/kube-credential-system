@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-credential-system-frontend
+  labels:
+    app: kube-credential-system-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-credential-system-frontend
+  template:
+    metadata:
+      labels:
+        app: kube-credential-system-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: kube-credential-system-frontend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/share/nginx/html/config
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: kube-credential-system-frontend

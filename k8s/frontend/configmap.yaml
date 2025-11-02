@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kube-credential-system-frontend
+data:
+  config.json: |
+    {
+      "BACKEND_ISSUANCE_API_URL": "http://localhost:9001",
+      "BACKEND_VERIFICATION_API_URL": "http://localhost:9002"
+    }

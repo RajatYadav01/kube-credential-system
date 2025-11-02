@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "types": ["node"],
+    "outDir": "./dist",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "es6",
+    "strict": true,
+    "esModuleInterop": true,
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

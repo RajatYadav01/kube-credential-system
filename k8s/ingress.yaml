@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kube-credential-system-ingress
+  namespace: default
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/redirect-entry-point: websecure
+spec:
+  tls:
+    - hosts:
+        - <PUBLIC_IP_ADDRESS>
+      secretName: selfsigned-tls
+  rules:
+    - host: <PUBLIC_IP_ADDRESS>
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kube-credential-system-frontend
+                port:
+                  number: 80
+          - path: /api/issuance
+            pathType: Prefix
+            backend:
+              service:
+                name: kube-credential-system-backend-issuance
+                port:
+                  number: 9001
+          - path: /api/verification
+            pathType: Prefix
+            backend:
+              service:
+                name: kube-credential-system-backend-verification
+                port:
+                  number: 9002

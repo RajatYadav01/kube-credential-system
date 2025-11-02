@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-credential-system-backend-verification
+  labels:
+    app: kube-credential-system-backend-verification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-credential-system-backend-verification
+  template:
+    metadata:
+      labels:
+        app: kube-credential-system-backend-verification
+    spec:
+      containers:
+        - name: kube-credential-system-backend-verification
+          image: kube-credential-system-backend-verification:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3002
+          env:
+            - name: PORT
+              value: "3002"
+            - name: WORKER_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: ISSUANCE_API_URL
+              value: "http://kube-credential-system-backend-issuance:9001"
+          volumeMounts:
+            - name: data-storage
+              mountPath: /app/data
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+      volumes:
+        - name: data-storage
+          emptyDir: {}

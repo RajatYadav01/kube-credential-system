@@ -1,0 +1,4 @@
+{
+  "BACKEND_ISSUANCE_API_URL": "http://localhost:3001",
+  "BACKEND_VERIFICATION_API_URL": "http://localhost:3002"
+}
