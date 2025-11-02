@@ -1,6 +1,7 @@
 {
-  "name": "issuance-service",
+  "name": "kube-credential-system-backend-verification-service",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "dev": "nodemon src/server.ts",
     "build": "tsc",
