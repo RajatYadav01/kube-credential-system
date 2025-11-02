@@ -64,7 +64,6 @@ export const IssuancePage = () => {
       const apiUrl =
         config.BACKEND_ISSUANCE_API_URL ||
         import.meta.env.VITE_ISSUANCE_API_URL;
-      console.log(apiUrl);
       const response = await axios.post(
         `${apiUrl}/api/issuance/issue`,
         credential,
